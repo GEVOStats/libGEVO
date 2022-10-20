@@ -11,22 +11,29 @@ namespace Bandai.GevoApi
     public abstract class BaseClient
     {
         protected abstract RestClient RestClient { get; }
+        public bool LoggedIn { get; private set; } = false;
 
         protected async Task KeepAlive()
         {
-            while (true)
+            LoggedIn = true;
+            while (LoggedIn)
             {
                 await REST.HandShake(RestClient);
                 Debug.WriteLine("Handshake was successful");
             }
         }
-        public async Task<Response.SearchFriend> SearchFriend(string name)
+        public async Task<Response.Social.SearchFriend> SearchFriend(string name)
         {
             var friend = await REST.SearchFriend(new(){ playerName = name }, RestClient);
             ArgumentNullException.ThrowIfNull(friend);
             if(friend.IsError)
                 throw new ArgumentException("SearchFriend returned an error.");
             return friend;
+        }
+        public async Task Logout()
+        {
+            LoggedIn = false;
+            await REST.Auth.Logout(RestClient);
         }
         public abstract Task LoginAsync(string authentication);
     }

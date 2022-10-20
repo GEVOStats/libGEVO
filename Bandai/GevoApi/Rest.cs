@@ -28,6 +28,13 @@ namespace Bandai.GevoApi
             /// <param name="client"></param>
             /// <returns></returns>
             public static async Task<Response.Auth.Login?> Login(Request.Auth.Login data, RestClient client) => await client.PostJsonAsync<Request.Auth.Login, Response.Auth.Login>("Auth/Login", data);
+
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="client"></param>
+            /// <returns></returns>
+            public static async Task<object?> Logout(RestClient client) => await client.PostJsonAsync<object, object>("Auth/Logout", new { });
         }
        
         /// <summary>
@@ -37,7 +44,7 @@ namespace Bandai.GevoApi
         /// <returns></returns>
         public static async Task<object?> HandShake(RestClient client) => await client.PostJsonAsync<object, object /* Unimplemented Response Type */ >("HandShake", new { });
 
-        public static async Task<Response.SearchFriend?> SearchFriend(Request.SearchFriend data, RestClient client) => await client.PostJsonAsync<Request.SearchFriend, Response.SearchFriend /* Unimplemented Response Type */ >("Social/SearchFriend",  data);
+        public static async Task<Response.Social.SearchFriend?> SearchFriend(Request.Social.SearchFriend data, RestClient client) => await client.PostJsonAsync<Request.Social.SearchFriend, Response.Social.SearchFriend>("Social/SearchFriend",  data);
 
     }
 }

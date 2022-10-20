@@ -1,5 +1,5 @@
 ﻿#pragma warning disable IDE1006 // Naming Styles
-namespace Bandai.GevoApi.Models.Request
+namespace Bandai.GevoApi.Models.Request.Social
 {
     public record SearchFriend
     {
