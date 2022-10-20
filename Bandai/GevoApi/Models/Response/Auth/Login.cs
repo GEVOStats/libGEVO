@@ -1,5 +1,7 @@
 ﻿#pragma warning disable IDE1006
-namespace Bandai.GevoApi.Models.Response
+using Bandai.GevoApi.Models.Response;
+
+namespace Bandai.GevoApi.Models.Response.Auth
 {
     public record Login : Base
     {

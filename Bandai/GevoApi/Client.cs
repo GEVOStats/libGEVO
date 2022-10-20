@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using Bandai.GevoApi.Models.Request;
+﻿using System.Diagnostics;
 using RestSharp;
 using RestSharp.Authenticators;
+
+using Request = Bandai.GevoApi.Models.Request;
+using Response = Bandai.GevoApi.Models.Response;
 
 namespace Bandai.GevoApi
 {
@@ -24,7 +20,7 @@ namespace Bandai.GevoApi
                 Debug.WriteLine("Handshake was successful");
             }
         }
-        public async Task<Models.Response.SearchFriend> SearchFriend(string name)
+        public async Task<Response.SearchFriend> SearchFriend(string name)
         {
             var friend = await REST.SearchFriend(new(){ playerName = name }, RestClient);
             ArgumentNullException.ThrowIfNull(friend);
@@ -42,12 +38,12 @@ namespace Bandai.GevoApi
 
         public override async Task LoginAsync(string authentication)
         {
-            var otp = await REST.PreLogin(PreLogin.Defaults.Steam with { authToken = authentication }, RestClient);
+            var otp = await REST.Auth.PreLogin(Request.Auth.PreLogin.Defaults.Steam with { authToken = authentication }, RestClient);
             ArgumentNullException.ThrowIfNull(otp);
             if(otp.IsError)
                 throw new ArgumentException("PreLogin returned an error.");
 
-            var jwt = await REST.Login(Login.Defaults.Steam with { authToken = otp.token }, RestClient);
+            var jwt = await REST.Auth.Login(Request.Auth.Login.Defaults.Steam with { authToken = otp.token }, RestClient);
             ArgumentNullException.ThrowIfNull(jwt);
             if (jwt.IsError)
                 throw new ArgumentException("Login returned an error");

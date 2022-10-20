@@ -1,11 +1,12 @@
 ﻿#pragma warning disable IDE1006 // Naming Styles
-namespace Bandai.GevoApi.Models.Request
+
+namespace Bandai.GevoApi.Models.Request.Auth
 {
     public record Login
     {
         public string authToken { get; set; } = string.Empty;
         public string accountType { get; set; } = string.Empty;
-        public List<int> packageVersion { get; set; } = new(){ 0, 0, 0, 0 };
+        public List<int> packageVersion { get; set; } = new() { 0, 0, 0, 0 };
         public string platformInfo { get; set; } = string.Empty;
         public string osInfo { get; set; } = string.Empty;
         public string cpuInfo { get; set; } = string.Empty;
@@ -19,12 +20,12 @@ namespace Bandai.GevoApi.Models.Request
         public static class Defaults
         {
             public static Login Steam => new()
-                {
-                    accountType = "Console",
-                    packageVersion = new() { 999, 999, 999, 999999 },
-                    platformInfo = "Steam",
-                    CreateConsoleSession = true
-                };
+            {
+                accountType = "Console",
+                packageVersion = new() { 999, 999, 999, 999999 },
+                platformInfo = "Steam",
+                CreateConsoleSession = true
+            };
         }
     }
 }

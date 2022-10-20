@@ -1,4 +1,4 @@
-﻿namespace Bandai.GevoApi.Models.Request
+﻿namespace Bandai.GevoApi.Models.Request.Auth
 {
     public record PreLogin
     {
