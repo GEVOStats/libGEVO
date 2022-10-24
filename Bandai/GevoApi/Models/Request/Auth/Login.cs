@@ -1,6 +1,4 @@
-﻿#pragma warning disable IDE1006 // Naming Styles
-
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.Text.Json.Serialization;
 
 namespace Bandai.GevoApi.Models.Request.Auth
@@ -33,4 +31,3 @@ namespace Bandai.GevoApi.Models.Request.Auth
         }
     }
 }
-#pragma warning restore IDE1006 // Naming Styles

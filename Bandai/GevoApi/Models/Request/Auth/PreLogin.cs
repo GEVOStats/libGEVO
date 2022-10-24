@@ -1,14 +1,17 @@
-﻿namespace Bandai.GevoApi.Models.Request.Auth
-{
-    public record PreLogin
-    {
-        public string authToken { get; set; } = string.Empty;
-        public string accountType { get; set; } = string.Empty;
-        public string currentLanguage { get; set; } = string.Empty;
+﻿using System.Text.Json.Serialization;
 
+namespace Bandai.GevoApi.Models.Request.Auth
+{
+    public record PreLogin(
+        [property: JsonPropertyName("authToken")] string AuthToken,
+        [property: JsonPropertyName("accountType")] string AccountType,
+        [property: JsonPropertyName("currentLanguage")] string CurrentLanguage
+    )
+    {
         public static class Defaults
         {
-            public static PreLogin Steam => new() { accountType = "Console" };
+            public static PreLogin None => new("", "", "");
+            public static PreLogin Steam => None with { AccountType = "Console" };
         }
     }
 }

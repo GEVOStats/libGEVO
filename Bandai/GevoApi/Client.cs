@@ -45,7 +45,7 @@ namespace Bandai.GevoApi
 
         public override async Task LoginAsync(string authentication)
         {
-            var otp = await REST.Auth.PreLogin(Request.Auth.PreLogin.Defaults.Steam with { authToken = authentication }, RestClient);
+            var otp = await REST.Auth.PreLogin(Request.Auth.PreLogin.Defaults.Steam with { AuthToken = authentication }, RestClient);
             ArgumentNullException.ThrowIfNull(otp);
             if(otp.IsError)
                 throw new ArgumentException("PreLogin returned an error.");
