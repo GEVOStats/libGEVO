@@ -44,7 +44,7 @@ namespace Bandai.GevoApi
         /// <returns></returns>
         public static async Task<object?> HandShake(RestClient client) => await client.PostJsonAsync<object, object /* Unimplemented Response Type */ >("HandShake", new { });
 
-        public static async Task<Response.Social.SearchFriend?> SearchFriend(Request.Social.Advanced data, RestClient client) => await client.PostJsonAsync<Request.Social.Advanced, Response.Social.SearchFriend>("Social/SearchFriend",  data);
+        public static async Task<Response.Social.SearchFriend?> SearchFriend(Request.Social.SearchFriend data, RestClient client) => await client.PostJsonAsync<Request.Social.SearchFriend, Response.Social.SearchFriend>("Social/SearchFriend",  data);
 
     }
 }
