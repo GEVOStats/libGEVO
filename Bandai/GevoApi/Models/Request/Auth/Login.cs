@@ -1,29 +1,33 @@
 ﻿#pragma warning disable IDE1006 // Naming Styles
 
+using System.Collections.Immutable;
+using System.Text.Json.Serialization;
+
 namespace Bandai.GevoApi.Models.Request.Auth
 {
-    public record Login
+    public record Login(
+        [property: JsonPropertyName("authToken")] string AuthToken,
+        [property: JsonPropertyName("accountType")] string AccountType,
+        [property: JsonPropertyName("packageVersion")] IReadOnlyList<int> PackageVersion,
+        [property: JsonPropertyName("platformInfo")] string PlatformInfo,
+        [property: JsonPropertyName("osInfo")] string OsInfo,
+        [property: JsonPropertyName("cpuInfo")] string CpuInfo,
+        [property: JsonPropertyName("memInfo")] string MemInfo,
+        [property: JsonPropertyName("gpuInfos")] IReadOnlyList<string> GpuInfos,
+        [property: JsonPropertyName("macAddress")] IReadOnlyList<int> MacAddress,
+        [property: JsonPropertyName("hddUuid")] Guid HddUuid,
+        [property: JsonPropertyName("matchingArea")] int MatchingArea,
+        [property: JsonPropertyName("CreateConsoleSession")] bool CreateConsoleSession
+    )
     {
-        public string authToken { get; set; } = string.Empty;
-        public string accountType { get; set; } = string.Empty;
-        public List<int> packageVersion { get; set; } = new() { 0, 0, 0, 0 };
-        public string platformInfo { get; set; } = string.Empty;
-        public string osInfo { get; set; } = string.Empty;
-        public string cpuInfo { get; set; } = string.Empty;
-        public string memInfo { get; set; } = string.Empty;
-        public List<object> gpuInfos { get; set; } = new();
-        public List<int> macAddress { get; set; } = new() { 0, 0, 0, 0, 0, 0 };
-        public Guid hddUuid { get; set; } = Guid.Empty;
-        public int matchingArea { get; set; } = 0;
-        public bool CreateConsoleSession { get; set; } = false;
-
         public static class Defaults
         {
-            public static Login Steam => new()
+            public static Login None => new("", "", ImmutableArray.Create(0,0,0,0), "", "", "", "", ImmutableArray.Create<string>(), ImmutableArray.Create(0, 0, 0, 0, 0, 0), Guid.Empty, 0, false);
+            public static Login Steam => None with
             {
-                accountType = "Console",
-                packageVersion = new() { 999, 999, 999, 999999 },
-                platformInfo = "Steam",
+                AccountType = "Console",
+                PackageVersion = ImmutableArray.Create( 999, 999, 999, 999999),
+                PlatformInfo = "Steam",
                 CreateConsoleSession = true
             };
         }

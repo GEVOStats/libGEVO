@@ -24,7 +24,7 @@ namespace Bandai.GevoApi
         }
         public async Task<Response.Social.SearchFriend> SearchFriend(string name)
         {
-            var friend = await REST.SearchFriend(new(){ playerName = name }, RestClient);
+            var friend = await REST.SearchFriend(new(name), RestClient);
             ArgumentNullException.ThrowIfNull(friend);
             if(friend.IsError)
                 throw new ArgumentException("SearchFriend returned an error.");
@@ -50,7 +50,7 @@ namespace Bandai.GevoApi
             if(otp.IsError)
                 throw new ArgumentException("PreLogin returned an error.");
 
-            var jwt = await REST.Auth.Login(Request.Auth.Login.Defaults.Steam with { authToken = otp.token }, RestClient);
+            var jwt = await REST.Auth.Login(Request.Auth.Login.Defaults.Steam with { AuthToken = otp.token }, RestClient);
             ArgumentNullException.ThrowIfNull(jwt);
             if (jwt.IsError)
                 throw new ArgumentException("Login returned an error");

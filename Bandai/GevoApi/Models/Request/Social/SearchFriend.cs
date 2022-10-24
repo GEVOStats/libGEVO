@@ -1,9 +1,8 @@
-﻿#pragma warning disable IDE1006 // Naming Styles
+﻿using System.Text.Json.Serialization;
+
 namespace Bandai.GevoApi.Models.Request.Social
 {
-    public record SearchFriend
-    {
-        public string playerName { get; set; } = string.Empty;
-    }
+    public record SearchFriend(
+        [property: JsonPropertyName("playerName")] string PlayerName
+    );
 }
-#pragma warning restore IDE1006 // Naming Styles
