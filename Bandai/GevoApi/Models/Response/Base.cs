@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Bandai.GevoApi.Models.Response
 {
-    public record Base
+    public record Base(
+        [property: JsonPropertyName("error")] Error? Error = null
+    )
     {
-        public Error? error { get; set; }
-        public bool IsError => error != null;
-    }
+        public bool IsError => Error != null;
+    };
 }

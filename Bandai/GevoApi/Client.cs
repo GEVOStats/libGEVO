@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Security.Cryptography.X509Certificates;
 using RestSharp;
 using RestSharp.Authenticators;
 
@@ -30,6 +31,20 @@ namespace Bandai.GevoApi
                 throw new ArgumentException("SearchFriend returned an error.");
             return friend;
         }
+
+        public void Auth_Logout()
+        {
+
+        }
+
+        public void Auth()
+        {
+            void Logout()
+            {
+
+            }
+        }
+
         public async Task Logout()
         {
             LoggedIn = false;
@@ -50,12 +65,12 @@ namespace Bandai.GevoApi
             if(otp.IsError)
                 throw new ArgumentException("PreLogin returned an error.");
 
-            var jwt = await REST.Auth.Login(Request.Auth.Login.Defaults.Steam with { AuthToken = otp.token }, RestClient);
+            var jwt = await REST.Auth.Login(Request.Auth.Login.Defaults.Steam with { AuthToken = otp.Token }, RestClient);
             ArgumentNullException.ThrowIfNull(jwt);
             if (jwt.IsError)
                 throw new ArgumentException("Login returned an error");
 
-            RestClient.Authenticator = new JwtAuthenticator(jwt.token);
+            RestClient.Authenticator = new JwtAuthenticator(jwt.Token);
 
             _ = Task.Run(KeepAlive); //begin the heartbeat process to keep jwt valid.
         }

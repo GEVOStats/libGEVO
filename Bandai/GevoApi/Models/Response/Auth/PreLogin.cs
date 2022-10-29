@@ -1,31 +1,29 @@
-﻿#pragma warning disable IDE1006
-using Bandai.GevoApi.Models.Response;
+﻿using System.Collections.Immutable;
+using System.Text.Json.Serialization;
+using static Bandai.GevoApi.Models.Response.Auth.PreLogin;
 
 namespace Bandai.GevoApi.Models.Response.Auth
 {
-    public record PreLogin : Base
+    public record PreLogin(
+        [property: JsonPropertyName("token")] string Token,
+        [property: JsonPropertyName("matchingArea")] int MatchingArea,
+        [property: JsonPropertyName("countryCode")] string CountryCode,
+        [property: JsonPropertyName("returnBattle")] bool ReturnBattle,
+        [property: JsonPropertyName("agreedServiceTerm")] bool AgreedServiceTerm,
+        [property: JsonPropertyName("serviceTerms")] ImmutableList<ServiceTerm> ServiceTerms,
+        [property: JsonPropertyName("season")] int Season
+    ) : Base
     {
-        public string token { get; set; } = "";
-        public int matchingArea { get; set; } = 0;
-        public string countryCode { get; set; } = "";
-        public bool returnBattle { get; set; } = false;
-        public bool agreedServiceTerm { get; set; } = false;
-        public List<ServiceTerm> serviceTerms { get; set; } = new List<ServiceTerm>();
-        public int season { get; set; } = 0;
-
-        public class ServiceTerm
-        {
-            public int type { get; set; } = 0;
-            public int languageCode { get; set; } = 0; 
-            public int platform { get; set; } = 0; 
-            public int countryCode { get; set; } = 0;
-            public string title { get; set; } = "";
-            public string text { get; set; } = "";
-            public int majorVersion { get; set; } = 0;
-            public int minorVersion { get; set; } = 0;
-            public int termId { get; set; } = 0;
-        }
+        public record ServiceTerm(
+                [property: JsonPropertyName("type")] int Type,
+                [property: JsonPropertyName("languageCode")] int LanguageCode,
+                [property: JsonPropertyName("platform")] int Platform,
+                [property: JsonPropertyName("countryCode")] int CountryCode,
+                [property: JsonPropertyName("title")] string Title,
+                [property: JsonPropertyName("text")] string Text,
+                [property: JsonPropertyName("majorVersion")] int MajorVersion,
+                [property: JsonPropertyName("minorVersion")] int MinorVersion,
+                [property: JsonPropertyName("termId")] int TermId
+        );
     }
 }
-#pragma warning restore IDE1006
-

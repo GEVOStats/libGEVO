@@ -1,13 +1,9 @@
-﻿#pragma warning disable IDE1006
-using Bandai.GevoApi.Models.Response;
+﻿using System.Text.Json.Serialization;
 
 namespace Bandai.GevoApi.Models.Response.Social
 {
-    public record SearchFriend : Base
-    {
-        public bool found { get; set; } = false;
-        public int playerId { get; set; } = 0;
-    }
+    public record SearchFriend(
+        [property: JsonPropertyName("found")] bool Found,
+        [property: JsonPropertyName("playerId")] int PlayerId
+    ) : Base;
 }
-#pragma warning restore IDE1006
-

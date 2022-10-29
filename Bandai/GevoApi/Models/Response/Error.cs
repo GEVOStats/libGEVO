@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
 namespace Bandai.GevoApi.Models.Response
 {
-    public record Error
-    {
-        public int errCode { get; set; } = 0;
-        public int subCode { get; set; } = 0;
-        public string param1 { get; set; } = "";
-    }
+    public record Error(
+        [property: JsonPropertyName("errCode")] int ErrCode,
+        [property: JsonPropertyName("subCode")] int SubCode,
+        [property: JsonPropertyName("param1")] string Param1
+    );
 }

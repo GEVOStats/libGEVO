@@ -1,28 +1,24 @@
-﻿#pragma warning disable IDE1006
-using Bandai.GevoApi.Models.Response;
+﻿using System.Text.Json.Serialization;
 
 namespace Bandai.GevoApi.Models.Response.Auth
 {
-    public record Login : Base
-    {
-        public string token { get; set; } = string.Empty;
-        public int playerId { get; set; } = 0;
-        public int matchingArea { get; set; } = 0;
-        public int initialLevel { get; set; } = 0;
-        public int privilegeLevel { get; set; } = 0;
-        public bool returnBattle { get; set; } = false;
-        public int secessionMatchPhase { get; set; } = 0;
-        public string apiServerVersion { get; set; } = string.Empty;
-        public int bonusProgress { get; set; } = 0; 
-        public int tutorialProgress { get; set; } = 0;
-        public List<string> opsNoticeCodes { get; set; } = new();
-        public List<object> disabledMobileSuits { get; set; } = new(); //probably string, currently unused.
-        public bool warning { get; set; } = false;
-        public string warningTitle { get; set; } = string.Empty;
-        public string warningText { get; set; } = string.Empty;
-        public string penaltyRemainingTime { get; set; } = string.Empty;
-        public bool isNewSeason { get; set; } = false;
-    }
+    public record Login(
+        [property: JsonPropertyName("token")] string Token,
+        [property: JsonPropertyName("playerId")] int PlayerId,
+        [property: JsonPropertyName("matchingArea")] int MatchingArea,
+        [property: JsonPropertyName("initialLevel")] int InitialLevel,
+        [property: JsonPropertyName("privilegeLevel")] int PrivilegeLevel,
+        [property: JsonPropertyName("returnBattle")] bool ReturnBattle,
+        [property: JsonPropertyName("secessionMatchPhase")] int SecessionMatchPhase,
+        [property: JsonPropertyName("apiServerVersion")] string ApiServerVersion,
+        [property: JsonPropertyName("bonusProgress")] int BonusProgress,
+        [property: JsonPropertyName("tutorialProgress")] int TutorialProgress,
+        [property: JsonPropertyName("opsNoticeCodes")] IReadOnlyList<string> OpsNoticeCodes,
+        [property: JsonPropertyName("disabledMobileSuits")] IReadOnlyList<object> DisabledMobileSuits,
+        [property: JsonPropertyName("warning")] bool Warning,
+        [property: JsonPropertyName("warningTitle")] string WarningTitle,
+        [property: JsonPropertyName("warningText")] string WarningText,
+        [property: JsonPropertyName("penaltyRemainingTime")] string PenaltyRemainingTime,
+        [property: JsonPropertyName("isNewSeason")] bool IsNewSeason
+    ) : Base;
 }
-#pragma warning restore IDE1006
-
